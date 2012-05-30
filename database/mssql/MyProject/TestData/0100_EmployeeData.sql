@@ -1,0 +1,48 @@
+SET IDENTITY_INSERT [Employee] ON
+GO
+
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1000,'First000', 'Last000', '1/1/1960', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1001,'First001', 'Last001', '1/1/1961', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1002,'First002', 'Last002', '1/1/1962', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1003,'First003', 'Last003', '1/1/1963', 'Portland, OR')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1004,'First004', 'Last004', '1/1/1964', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1005,'First005', 'Last005', '1/1/1965', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1006,'First006', 'Last006', '1/1/1966', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1007,'First007', 'Last007', '1/1/1967', 'Portland, OR')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1008,'First008', 'Last008', '1/1/1968', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1009,'First009', 'Last009', '1/1/1969', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1010,'First010', 'Last010', '1/1/1970', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1011,'First011', 'Last011', '1/1/1971', 'Portland, OR')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1012,'First012', 'Last012', '1/1/1972', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1013,'First013', 'Last013', '1/1/1973', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1014,'First014', 'Last014', '1/1/1974', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1015,'First015', 'Last015', '1/1/1975', 'Portland, OR')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1016,'First016', 'Last016', '1/1/1976', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1017,'First017', 'Last017', '1/1/1977', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1018,'First018', 'Last018', '1/1/1978', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1019,'First019', 'Last019', '1/1/1979', 'Portland, OR')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1020,'First020', 'Last020', '1/1/1980', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1021,'First021', 'Last021', '1/1/1981', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1022,'First022', 'Last022', '1/1/1982', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1023,'First023', 'Last023', '1/1/1983', 'Portland, OR')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1024,'First024', 'Last024', '1/1/1984', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1025,'First025', 'Last025', '1/1/1985', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1026,'First026', 'Last026', '1/1/1986', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1027,'First027', 'Last027', '1/1/1987', 'Portland, OR')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1028,'First028', 'Last028', '1/1/1988', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1029,'First029', 'Last029', '1/1/1989', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1030,'First030', 'Last030', '1/1/1990', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1031,'First031', 'Last031', '1/1/1991', 'Portland, OR')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1032,'First032', 'Last032', '1/1/1992', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1033,'First033', 'Last033', '1/1/1993', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1034,'First034', 'Last034', '1/1/1994', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1035,'First035', 'Last035', '1/1/1995', 'Portland, OR')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1036,'First036', 'Last036', '1/1/1996', 'Austin, TX')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1037,'First037', 'Last037', '1/1/1997', 'New York, NY')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1038,'First038', 'Last038', '1/1/1998', 'San Diego, CA')
+INSERT INTO [Employee] ([EmployeeId], [FirstName],[LastName],[DateOfBirth],[CityState]) VALUES(1039,'First039', 'Last039', '1/1/1999', 'Portland, OR')
+
+GO
+
+SET IDENTITY_INSERT [Employee] OFF
+GO

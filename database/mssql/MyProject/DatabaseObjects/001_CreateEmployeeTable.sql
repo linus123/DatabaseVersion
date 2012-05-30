@@ -3,6 +3,7 @@ CREATE TABLE [dbo].[Employee](
 	[FirstName] [nvarchar](64) NOT NULL,
 	[LastName] [nvarchar](64) NOT NULL,
 	[DateOfBirth] [date] NOT NULL,
+	[CityState] [nvarchar](255) NOT NULL,
  CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
 (
 	[EmployeeId] ASC

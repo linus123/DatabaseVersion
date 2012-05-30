@@ -10,6 +10,7 @@ properties {
 	$dbDeployExec = "$baseDir\lib\dbdeploy\dbdeploy.exe"
 	
 	$standardDatabaseObjectsFolder = "$baseDir\database\mssql\$projectName\StandardObjects"
+	$testDataFolder = "$baseDir\database\mssql\$projectName\TestData"
 	
 	$packagePath = "$baseDir\package"
 
@@ -17,7 +18,7 @@ properties {
 	$undoDatabaseScriptPath = "$packagePath\DatabaseRollback.sql"
 }
 
-task default -depends Init, ResetDatabase
+task default -depends Init, ResetDatabase, PopulateTestData
 
 formatTaskName {
 	param($taskName)
@@ -42,6 +43,10 @@ task ResetDatabase {
 		-tablename DatabaseVersion
 	}
 	ExecuteSqlFile $databaseServerName $databaseName $doDatabaseScriptPath
+}
+
+task PopulateTestData {
+	RunDatabaseScriptsFromFolder $databaseServerName $databaseName $testDataFolder
 }
 
 # *******************************************************************************
