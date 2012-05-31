@@ -8,6 +8,8 @@ properties {
 	$databaseScriptsPath = "$baseDir\database\mssql\$projectName\DatabaseObjects"
 	
 	$dbDeployExec = "$baseDir\lib\dbdeploy\dbdeploy.exe"
+	$7zipExec = "$baseDir\lib\7zip\7za.exe"
+	$nunitRunnerExec = "$baseDir\src\packages\NUnit.Runners.2.6.0.12051\tools\nunit-console.exe"
 	
 	$standardDatabaseObjectsFolder = "$baseDir\database\mssql\$projectName\StandardObjects"
 	$testDataFolder = "$baseDir\database\mssql\$projectName\TestData"
@@ -16,9 +18,13 @@ properties {
 
 	$doDatabaseScriptPath = "$packagePath\DatabaseUpgrade.sql"
 	$undoDatabaseScriptPath = "$packagePath\DatabaseRollback.sql"
+	
+	$dateStamp = get-date -uformat "%Y%m%d%H%M"
+	
+	$testsSolutionFile = "$baseDir\src\DatabaseTests.sln"
 }
 
-task default -depends Init, ResetDatabase, PopulateTestData
+task default -depends Init, ResetDatabase, PopulateTestData, BuildTests, RunTests, ZipChangeScripts
 
 formatTaskName {
 	param($taskName)
@@ -47,6 +53,21 @@ task ResetDatabase {
 
 task PopulateTestData {
 	RunDatabaseScriptsFromFolder $databaseServerName $databaseName $testDataFolder
+}
+
+task BuildTests {
+	Exec { msbuild "$testsSolutionFile" /t:Clean /p:Configuration=Release /v:quiet }
+	Exec { msbuild "$testsSolutionFile" /t:Build /p:Configuration=Release /v:quiet /p:OutDir="$packagePath\DatabaseTests\" }
+}
+
+task RunTests {
+	Exec { &$nunitRunnerExec "$packagePath\DatabaseTests\DatabaseTests.dll" /xml="$packagePath\DatabaseTests.dll.xml" }
+}
+
+task ZipChangeScripts {
+	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_Development`_$dateStamp.Implement.zip" "$packagePath\DatabaseUpgrade.sql" }
+	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_Development`_$dateStamp.ROLLBACK.zip" "$packagePath\DatabaseRollback.sql" }
+
 }
 
 # *******************************************************************************
