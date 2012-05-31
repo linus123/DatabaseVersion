@@ -24,7 +24,7 @@ properties {
 	$testsSolutionFile = "$baseDir\src\DatabaseTests.sln"
 }
 
-task default -depends Init, ResetDatabase, PopulateTestData, BuildTests, RunTests, ZipChangeScripts
+task default -depends Init, ResetDatabase, PopulateTestData, BuildTests, RunTests, PackageForDev, PackageForStg, PackageForPrd
 
 formatTaskName {
 	param($taskName)
@@ -64,15 +64,26 @@ task RunTests {
 	Exec { &$nunitRunnerExec "$packagePath\DatabaseTests\DatabaseTests.dll" /xml="$packagePath\DatabaseTests.dll.xml" }
 }
 
-task ZipChangeScripts {
-	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_Development`_$dateStamp.Implement.zip" "$packagePath\DatabaseUpgrade.sql" }
-	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_Development`_$dateStamp.ROLLBACK.zip" "$packagePath\DatabaseRollback.sql" }
+task PackageForDev {	
+	ZipSqlFilesForEnv "Development"
+}
 
+task PackageForStg {
+	ZipSqlFilesForEnv "Staging"
+}
+
+task PackageForPrd {
+	ZipSqlFilesForEnv "Production"
 }
 
 # *******************************************************************************
 # *******************************************************************************
 # *******************************************************************************
+
+Function ZipSqlFilesForEnv([string] $env) {
+	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_$env`_$dateStamp.Implement.zip" "$packagePath\DatabaseUpgrade.sql" }
+	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_$env`_$dateStamp.ROLLBACK.zip" "$packagePath\DatabaseRollback.sql" }
+}
 
 Function DeleteAndRecreateFolder($folder) {
 	Write-Host "Deleting and recreating $folder."
