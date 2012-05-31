@@ -1,13 +1,17 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using NUnit.Framework;
 
 namespace DatabaseTests
 {
     public abstract class SingleTableTestsBase
     {
+        protected DatabaseTestHelper DatabaseTestHelper;
+
+        protected SingleTableTestsBase()
+        {
+            DatabaseTestHelper = new DatabaseTestHelper();
+        }
+
         protected abstract string TableName { get; }
         protected abstract string KeyColumns { get; }
 
@@ -24,7 +28,7 @@ SELECT
 
             var sql = string.Format(sqlTemplate, TableName);
 
-            var dataSet = GetDataSetForSql(sql);
+            var dataSet = DatabaseTestHelper.GetDataSetForSql(sql);
 
             Assert.Pass();
         }
@@ -45,38 +49,10 @@ SELECT
 ";
             var sql = String.Format(sqlTemplate, KeyColumns, TableName);
 
-            var dataSet = GetDataSetForSql(sql);
+            var dataSet = DatabaseTestHelper.GetDataSetForSql(sql);
 
             Assert.That(dataSet.Tables[0].Rows.Count, Is.EqualTo(0));
         }
 
-        protected void ExecuteWithConnection(Action<SqlConnection> connectionAction)
-        {
-            var connectionString = ConfigurationManager.ConnectionStrings["LocalDatabase"].ConnectionString;
-
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                sqlConnection.Open();
-                connectionAction(sqlConnection);
-                sqlConnection.Close();
-            }
-
-        }
-
-        protected DataSet GetDataSetForSql(string sql)
-        {
-            var dataSet = new DataSet();
-
-            ExecuteWithConnection(
-                sqlConnection =>
-                {
-                    var sqlCommand = new SqlCommand(sql, sqlConnection);
-                    sqlCommand.CommandType = CommandType.Text;
-                    var sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                    sqlDataAdapter.Fill(dataSet);
-                });
-            return dataSet;
-        }
     }
 }

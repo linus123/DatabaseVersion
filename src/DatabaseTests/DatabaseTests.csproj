@@ -45,10 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmployeeLastPaycheckViewTests.cs" />
     <Compile Include="EmployeeTableTests.cs" />
     <Compile Include="PaycheckTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleTableTestsBase.cs" />
+    <Compile Include="DatabaseTestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
