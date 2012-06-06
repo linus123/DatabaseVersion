@@ -22,6 +22,10 @@ properties {
 	$dateStamp = get-date -uformat "%Y%m%d%H%M"
 	
 	$testsSolutionFile = "$baseDir\src\DatabaseTests.sln"
+
+	$devDatabaseName = "VersionControlSampleDev"
+	$stgDatabaseName = "VersionControlSampleStg"
+	$prdDatabaseName = "VersionControlSamplePrd"
 }
 
 task default -depends Init, ResetDatabase, PopulateTestData, BuildTests, RunTests, PackageForDev, PackageForStg, PackageForPrd
@@ -64,15 +68,18 @@ task RunTests {
 	Exec { &$nunitRunnerExec "$packagePath\DatabaseTests\DatabaseTests.dll" /xml="$packagePath\DatabaseTests.dll.xml" }
 }
 
-task PackageForDev {	
+task PackageForDev {
+	CreateEnviornmentDoAndUndoSqlFile "Development" $devDatabaseName
 	ZipSqlFilesForEnv "Development"
 }
 
 task PackageForStg {
+	CreateEnviornmentDoAndUndoSqlFile "Staging" $stgDatabaseName
 	ZipSqlFilesForEnv "Staging"
 }
 
 task PackageForPrd {
+	CreateEnviornmentDoAndUndoSqlFile "Production" $prdDatabaseName
 	ZipSqlFilesForEnv "Production"
 }
 
@@ -80,9 +87,21 @@ task PackageForPrd {
 # *******************************************************************************
 # *******************************************************************************
 
+Function CreateEnviornmentDoAndUndoSqlFile([string] $env, [string] $databaseName) {
+	$envDoScript = $doDatabaseScriptPath.Replace(".sql", "_$env.sql")
+	copy-item "$doDatabaseScriptPath" "$envDoScript"
+	
+	PlaceUsingOnSqlFile $envDoScript $databaseName
+
+	$envUndoScript = $undoDatabaseScriptPath.Replace(".sql", "_$env.sql")
+	copy-item "$undoDatabaseScriptPath" "$envUndoScript"
+
+	PlaceUsingOnSqlFile $envUndoScript $databaseName
+}
+
 Function ZipSqlFilesForEnv([string] $env) {
-	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_$env`_$dateStamp.Implement.zip" "$packagePath\DatabaseUpgrade.sql" }
-	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_$env`_$dateStamp.ROLLBACK.zip" "$packagePath\DatabaseRollback.sql" }
+	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_$env`_$dateStamp.Implement.zip" "$packagePath\DatabaseUpgrade_$env.sql" }
+	Exec { &$7zipExec a "-x!*.zip" "$packagePath\VersionSample_Database_$env`_$dateStamp.ROLLBACK.zip" "$packagePath\DatabaseRollback_$env.sql" }
 }
 
 Function DeleteAndRecreateFolder($folder) {
@@ -186,4 +205,33 @@ function ResolveError($ErrorRecord=$Error[0])
    {   "$i" * 80
        $Exception |Format-List * -Force
    }
+}
+
+Function ChangeLinkedServerReference([string] $filePath, [string] $env)
+{
+    (Get-Content $filePath) `
+        | ForEach-object {$_ -replace "-PRD", "-$env" } `
+        | ForEach-object {$_ -replace "-STG", "-$env" } `
+        | ForEach-object {$_ -replace "-DEV", "-$env" } `
+        | Set-Content $filePath
+}
+
+Function PlaceUsingOnSqlFile($fullFilePath, [string] $databaseName)
+{
+    Write-Host "Adding USING [$databaseName] to $fullFilePath"
+	
+	$isFirst = $true
+	
+	(Get-Content $fullFilePath) | `
+		Foreach-Object {
+			if ($isFirst)
+			{
+				$isFirst = $false
+				"USE [$databaseName]"
+				"GO"
+				""
+			}
+		
+			$_
+		} | Set-Content $fullFilePath
 }
