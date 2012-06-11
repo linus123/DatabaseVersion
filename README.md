@@ -17,6 +17,6 @@ Check out the code to your local computer and run...
 	
 Powershell Message
 --------------------------------
-The first time you run a PowerShell module on your computer you may get an error message complaining about execution policies.  PowerShell security by default will not run is set to NOT run modules.  You can solve the problem by running PowerShell as an administrator and typing in the command
+The first time you run a PowerShell module on your computer you may get an error message complaining about execution policies.  PowerShell secuirty, by default, will not run modules.  You can solve the problem by running PowerShell as an administrator and typing in the command
 
 	Set-ExecutionPolicy RemoteSigned
