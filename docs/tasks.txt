@@ -1,0 +1,3 @@
+look for assertion helps for NUnit
+helper tests for database
+test for tables standards
