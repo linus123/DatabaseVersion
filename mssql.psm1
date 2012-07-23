@@ -33,7 +33,7 @@ Function ExecuteSqlQuery([string]$serverName, [string]$databaseName, [string]$sq
 	}
 	Catch [system.exception]
 	{
-		Resolve-Error $_.Exception
+		ResolveError $_.Exception
 		throw
 	}
 }
