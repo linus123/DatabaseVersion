@@ -23,6 +23,9 @@ param(
   [switch]$nologo = $false
 )
 
+remove-module mssql -ea 'SilentlyContinue'
+import-module (join-path $scriptPath mssql.psm1)
+
 remove-module psake -ea 'SilentlyContinue'
 import-module (join-path $scriptPath psake.psm1)
 if (-not(test-path $buildFile))
