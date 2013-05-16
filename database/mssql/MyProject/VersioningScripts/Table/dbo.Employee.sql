@@ -8,6 +8,7 @@ CREATE TABLE [dbo].[Employee](
 	[LastName] [nvarchar](64) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[DateOfBirth] [date] NOT NULL,
 	[CityState] [nvarchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[NickName] [nvarchar](64) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
  CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
 (
 	[EmployeeId] ASC
